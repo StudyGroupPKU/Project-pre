@@ -2,7 +2,7 @@ import os
 
 # Need to input RAW DATA!!!
 def MakeList(filename):
-    print(filename)
+    #print(filename)
     if(filename[0]=="/"):
         filename = filename
     elif((filename[0]=="C")&(filename[1]==":")):
