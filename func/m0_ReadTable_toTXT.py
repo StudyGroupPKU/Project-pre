@@ -33,7 +33,7 @@ class MySQL_DATA:
             flag += 1
     def select_databases(self):
         #print(self.DataBase_list)
-        self.database_num = int(input("[TYPE] Please enter the number of Database :  "))
+        self.database_num = int(input("[TYPE NUM] Please enter the number of Database :  "))
         print("--The database ***",self.DataBase_list[self.database_num], "*** is selected--")
         print("\n")
         self.cur.execute("use " + self.DataBase_list[self.database_num]+";")
@@ -47,7 +47,7 @@ class MySQL_DATA:
             self.Table_list.append((''.join(row)))
             flag += 1
     def select_table(self):
-        self.table_num = int(input("    [TYPE] Please enter the number of Table :  "))
+        self.table_num = int(input("    [TYPE NUM] Please enter the number of Table :  "))
         print("    --The table ***",self.Table_list[self.table_num], "*** is selected--")
         self.cur.execute("DESC "+self.Table_list[self.table_num] +";")
         for row in self.cur.fetchall():
@@ -60,7 +60,7 @@ class MySQL_DATA:
         print("MySQL interfaced command line... exit to leave",end='')
         while True:
             print()
-            command = input("[TYPE] MySQL command : ")
+            command = input("[TYPE SQL COMMAND] MySQL command : ")
             if command == 'exit':
                 break
             try:
@@ -79,7 +79,7 @@ class MySQL_DATA:
             print("** 'cli' to specify the data you want **")
             print("** 'wri' to directly write the text **")
             print("** 'exit' to quit writing process **\n")
-            command = input("[1][TYPE] Choose one from 'cli', 'wri', 'exit' : ")
+            command = input("[1][Choose] Choose one from 'cli', 'wri', 'exit' : ")
             if "cli" in command.lower() :
                 self.MySQL_command()
             elif "wri" in command.lower() :
@@ -100,7 +100,7 @@ class MySQL_DATA:
                 print()
                 to_break = 0
                 while True:
-                    DESC_table = input(" [1][TYPE] Choose 'sel':SELECT, 'desc':DESC, 'exit':exit: ")
+                    DESC_table = input(" [2][Choose] Choose 'sel':SELECT, 'desc':DESC, 'exit':exit: ")
                     if "sel" in DESC_table.lower():
                         break
                     elif 'exit' in DESC_table.lower():
@@ -111,29 +111,36 @@ class MySQL_DATA:
                         self.select_table()
                 if(to_break==1):
                     break
-                save_text = input("Targeting output text file.. ex) test.txt :   ")
-                save_command = input(" [1][TYPE] -*- The SAVING Command : SELECT * FROM ... -*- ('re'/'exit'): ")
-                if "re" == save_command.lower() :
-                    to_first = 1
+                save_text = input("[Data File Name] Targeting output text file.. ex) test.txt :   ")
+                while True:
+                    save_command = input(" [1][Code Typing select] -*- The SAVING Command : SELECT * FROM ... -*- ('re'/'exit'): ")
+                    if "re" == save_command.lower() :
+                        to_first = 1
+                        break
+                    if "exit" == save_command.lower() :
+                        to_first = 2
+                        break
+                    try:
+                        self.cur.execute(save_command)
+                        Write_list = []
+                        for row in self.cur.fetchall():
+                            #print(row)
+                            temp_list = []
+                            for data in row:
+                                if type(data) is datetime.date:
+                                    data = data.strftime("%Y-%m-%d-%H")
+                                temp_list.append(data)
+                            Write_list.append(temp_list)
+                        #print(Write_list)
+                        self.Write_row_list_text(RawList=Write_list, output_text=save_text)
+                        break
+                    except:
+                        print("invalid command... please re-type")
+
+                if(to_first==1):
                     break
-                if "exit" == save_command.lower() :
-                    to_first = 2
+                if(to_first==2):
                     break
-                try:
-                    self.cur.execute(save_command)
-                    Write_list = []
-                    for row in self.cur.fetchall():
-                        #print(row)
-                        temp_list = []
-                        for data in row:
-                            if type(data) is datetime.date:
-                                data = data.strftime("%Y-%m-%d-%H")
-                            temp_list.append(data)
-                        Write_list.append(temp_list)
-                    #print(Write_list)
-                    self.Write_row_list_text(RawList=Write_list, output_text=save_text)
-                except:
-                    print("invalid command... please re-type")
 
             if(to_first==1):
                 continue
