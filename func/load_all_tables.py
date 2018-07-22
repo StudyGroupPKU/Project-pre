@@ -87,4 +87,5 @@ def call_all(id, pw, ip):
 
 if __name__ == '__main__':
 	result = call_all('root', 'pyku2018', '154.8.160.186')
-	print(result['BAIDU_FeiYan'])
+
+	#print(result['BAIDU_FeiYan'])
