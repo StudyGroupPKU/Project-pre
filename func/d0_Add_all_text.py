@@ -1,9 +1,9 @@
 import sys,os
-sys.path.append("/Users/leejunho/Desktop/git/python3Env/group_study/project_pre/func")
+sys.path.append("/Users/leejunho/Desktop/git/python3Env/group_study/project_pre/func") #FIXME
 from c0_READ_PATH_FILE import read_file_name
 from d0_makelist import MakeList
 
-ADD every text file into a new text file, first line with the name of text file
+#ADD every text file into a new text file, first line with the name of text file
 def getData():
     all_text_path = []
     loadfile = ['.']
@@ -20,7 +20,7 @@ def getData():
                 else:
                     loadfile.append(os.path.join(path,x))
                     
-        except Exception,e:
+        except Exception:
             pass
             #print str(e) + path
     return all_text_path
