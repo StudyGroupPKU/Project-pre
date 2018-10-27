@@ -12,7 +12,7 @@ import re
 from PIL import Image
 from io import BytesIO
 from pynput.mouse import Button, Controller
-
+from files.machine_funcs import analy_pngs
 
 # import Image, pytesseract
 
@@ -325,26 +325,29 @@ class BAIDU_INDEX:
 			# sys.stdout.write('\a')
 			# sys.stdout.write('\a')
 			# os.system("tesseract AA.png AA_out")
-			os.system("tesseract AA.png AA_out nobatch digits")
+			#os.system("tesseract AA.png AA_out nobatch digits")
+			m_image = Image.open("AA.png")
+			m_data = analy_pngs(m_image)
 			time.sleep(1)
-			infile = open("AA_out.txt", "r")
-			for line in infile:
-				DATA = line.replace("\n", "");
-				DATA = DATA.replace("o", "0");
-				DATA = DATA.replace("O", "0");
-				DATA = DATA.replace(". ", "");
-				DATA = DATA.replace("'", "");
-				DATA = DATA.replace("B", "8");
-				DATA = DATA.replace(".", "");
-				DATA = DATA.replace("‘", "");
-				DATA = DATA.replace("?", "7");
-				DATA = DATA.replace("\n", "")
-				DATA = DATA.replace(" ", "")
-				DATA = DATA.replace("S", "5");
-				DATA = DATA.replace("s", "5");
-				DATA = DATA.replace("E", "8");
-				DATA = DATA.replace("a", "3");
-				break
+			DATA = str(m_data)
+		#	infile = open("AA_out.txt", "r")
+		#	for line in infile:
+		#		DATA = line.replace("\n", "");
+		#		DATA = DATA.replace("o", "0");
+		#		DATA = DATA.replace("O", "0");
+		#		DATA = DATA.replace(". ", "");
+		#		DATA = DATA.replace("'", "");
+		#		DATA = DATA.replace("B", "8");
+		#		DATA = DATA.replace(".", "");
+		#		DATA = DATA.replace("‘", "");
+		#		DATA = DATA.replace("?", "7");
+		#		DATA = DATA.replace("\n", "")
+		#		DATA = DATA.replace(" ", "")
+		#		DATA = DATA.replace("S", "5");
+		#		DATA = DATA.replace("s", "5");
+		#		DATA = DATA.replace("E", "8");
+		#		DATA = DATA.replace("a", "3");
+		#		break
 			#            print(DATE_INFO)
 			try:
 				print(DATE_INFO, DATA)
