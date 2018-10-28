@@ -1,9 +1,11 @@
+# -*- coding: UTF-8 -*-
+#!/usr/bin/python
 from PIL import Image
 import os,sys
 import numpy as np
-from two_layer_net import TwoLayerNet
+from files.two_layer_net import TwoLayerNet
 import pickle as pkl
-
+sys.path.append("~/Desktop/Group_study/Project-pre/func/files")
 #(x_train,t_train),(x_test,t_test) = load_mnist(normalize=True,one_hot_label=True)
 
 def load_datas(normalize=True):

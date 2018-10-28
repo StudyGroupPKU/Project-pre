@@ -120,7 +120,7 @@ class BAIDU_INDEX:
 		time.sleep(3)
 
 	def ACCESS_URL(self, URL="http://index.baidu.com/?tpl=trend&type=0&area=514&time=13&word=%CE%ED%F6%B2",
-				   start_year="2014", start_month="01", end_month="04", xposition=73, yposition=282, endx=1500):
+				   start_year="2015", start_month="01", end_month="04", xposition=73, yposition=282, endx=1500):
 		url_finish = 0
 		TT = -1
 		while url_finish == 0:
@@ -152,7 +152,7 @@ class BAIDU_INDEX:
 		time.sleep(1.5)
 		self.VIEW_BOX(init_mouseX=xposition, init_mouseY=yposition, mouse_endX=endx)
 
-	def Click_for_Month(self, START_YEAR="2014", START_MONTH="01", END_MONTH="04"):
+	def Click_for_Month(self, START_YEAR="2015", START_MONTH="01", END_MONTH="04"):
 		self.driver1.find_element_by_class_name("chartselectdiy").click()
 
 		SY_R = self.driver1.find_element_by_class_name("selectA.yearA")
@@ -186,7 +186,8 @@ class BAIDU_INDEX:
 	def Init_mouse(self, locx=45, locy=302):
 		self.mouse = Controller()
 		self.mouse.position = (locx, locy)
-		time.sleep(1)
+		tt = input("Please put the mouse cursor on init_location!")
+		time.sleep(3)
 
 	def loc_0(self, locx=408, locy=400):
 		self.mouse.position = (locx, locy)
@@ -204,7 +205,7 @@ class BAIDU_INDEX:
 		self.mouse.position = (locx, locy)
 		time.sleep(1)
 
-	def move_mouse(self, INTERVAL=5):
+	def move_mouse(self, INTERVAL=10.1):
 		self.mouse.move(INTERVAL, 0)
 
 	def xlocation_mouse(self):
@@ -318,6 +319,8 @@ class BAIDU_INDEX:
 						os.system("paplay beep-01a.wav")
 						os.system("paplay beep-01a.wav")
 						TTT = input(" [Need your help] press 'Enter' to continue!!")
+						if TTT == 'q':
+						    break
 						time.sleep(5)
 					NO_IMAGE = NO_IMAGE + 1
 				# print("3"); time.sleep(1); print("2"); time.sleep(1);print("1"); time.sleep(1); print("0!");
@@ -365,7 +368,7 @@ class BAIDU_INDEX:
 			print("Ready for next iteration!")
 			self.move_mouse()
 			time.sleep(1)
-			if ((self.xlocation_mouse()) > 1220):
+			if ((self.xlocation_mouse()) > 1320):
 				break
 		#            print("Move your mouse, now!")
 		print(data_list)

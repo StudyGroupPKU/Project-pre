@@ -2,9 +2,10 @@ import pickle as pkl
 from PIL import Image
 import numpy as np
 from files.machine_funcs import analy_pngs
+from files.two_layer_net import TwoLayerNet as two_layer_net
 import os,sys
 
-pkl_file = open('weights_final.pkl', 'rb')
+pkl_file = open('files/weights_final.pkl', 'rb')
 weights = pkl.load(pkl_file)
 for key in ('W1', 'b1', 'W2', 'b2'):
 	print(type(weights))
@@ -20,6 +21,7 @@ for file in files:
 # data = np.array(data, dtype='float')
 # new_data = np.reshape(data, (1, h * w))
 	y = analy_pngs(a)
+	print(y)
 	try:
 		os.rename(path+file,path+str(y)+".png")
 	except:
